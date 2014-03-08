@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.7'
   s.requires_arc = true
-  s.source       = { :git => "https://github.com/BZRuntime.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/expensivegasprices/BZRuntime.git", :tag => "1.0.0" }
   s.source_files  = 'BZRuntime', 'BZRuntime/BZ*.{h,m}'
 end
