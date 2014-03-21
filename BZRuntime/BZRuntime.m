@@ -36,26 +36,7 @@
 
 +(BZRuntime*)runtimeWithClass:(Class)clazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
 {
-    if (![clazz isSubclassOfClass:[NSObject class]]) {
-        return nil;
-    }
-    BZRuntime *runtime = [[BZRuntime runtimesCache]objectForKey:clazz];
-    if (!runtime) {
-        runtime = [[BZRuntime alloc]initWithClass:clazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
-        [[BZRuntime runtimesCache] setObject:runtime forKey:clazz];
-    }
-    return runtime;
-}
-
-+(NSCache *)runtimesCache{
-    @synchronized(self) {
-        static NSCache *propertiesCache;
-        if (!propertiesCache) {
-            propertiesCache = [[NSCache alloc] init];
-            propertiesCache.totalCostLimit = 3000;
-        }
-        return propertiesCache;
-    }
+    return [[BZRuntime alloc]initWithClass:clazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
 }
 
 - (id)initWithClass:(Class)clazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
