@@ -28,7 +28,6 @@
 @interface BZRuntimePropertyEncoding : NSObject
 - (id)initWithAttributes:(NSString*)attributes;
 @property (nonatomic,assign,readonly) NSString *code;
-@property (nonatomic,assign,readonly) BOOL isPrimitive;
 // Objective-C type encodings
 @property (nonatomic,assign,readonly) BOOL isChar;
 @property (nonatomic,assign,readonly) BOOL isInt;
@@ -39,7 +38,7 @@
 @property (nonatomic,assign,readonly) BOOL isUnsignedInt;
 @property (nonatomic,assign,readonly) BOOL isUnsignedShort;
 @property (nonatomic,assign,readonly) BOOL isUnsignedLong;
-@property (nonatomic,assign,readonly) BOOL iUnsignedLongLong;
+@property (nonatomic,assign,readonly) BOOL isUnsignedLongLong;
 @property (nonatomic,assign,readonly) BOOL isFloat;
 @property (nonatomic,assign,readonly) BOOL isDouble;
 @property (nonatomic,assign,readonly) BOOL isBool;

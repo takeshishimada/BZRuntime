@@ -36,7 +36,6 @@
         NSString *firstAttribute = [attributeList firstObject];
         _code = [firstAttribute substringWithRange:NSMakeRange(1, 1)];
         _attributes = attributes;
-        _isPrimitive = NO;
         _isChar = NO;
         _isInt = NO;
         _isShort = NO;
@@ -46,7 +45,7 @@
         _isUnsignedInt = NO;
         _isUnsignedShort = NO;
         _isUnsignedLong = NO;
-        _iUnsignedLongLong = NO;
+        _isUnsignedLongLong = NO;
         _isFloat = NO;
         _isDouble = NO;
         _isBool = NO;
@@ -79,7 +78,7 @@
         else if ([_code isEqualToString:@"I"]) _isUnsignedInt = YES;
         else if ([_code isEqualToString:@"S"]) _isUnsignedShort = YES;
         else if ([_code isEqualToString:@"L"]) _isUnsignedLong = YES;
-        else if ([_code isEqualToString:@"Q"]) _iUnsignedLongLong = YES;
+        else if ([_code isEqualToString:@"Q"]) _isUnsignedLongLong = YES;
         else if ([_code isEqualToString:@"f"]) _isFloat = YES;
         else if ([_code isEqualToString:@"d"]) _isDouble = YES;
         else if ([_code isEqualToString:@"B"]) _isBool = YES;
@@ -101,22 +100,6 @@
         else if ([_code isEqualToString:@"O"]) _isByCopy = YES;
         else if ([_code isEqualToString:@"R"]) _isByRef = YES;
         else if ([_code isEqualToString:@"V"]) _isOneway = YES;
-
-        // is Primitive or Not
-        if ([_code isEqualToString:@"c"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"i"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"s"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"l"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"q"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"C"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"I"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"S"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"L"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"Q"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"f"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"d"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"B"]) _isPrimitive = YES;
-        else if ([_code isEqualToString:@"*"]) _isPrimitive = YES;
 
     }
     return self;
