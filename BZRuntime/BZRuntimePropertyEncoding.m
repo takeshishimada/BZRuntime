@@ -116,6 +116,7 @@
         else if ([_code isEqualToString:@"f"]) _isPrimitive = YES;
         else if ([_code isEqualToString:@"d"]) _isPrimitive = YES;
         else if ([_code isEqualToString:@"B"]) _isPrimitive = YES;
+        else if ([_code isEqualToString:@"*"]) _isPrimitive = YES;
 
     }
     return self;
