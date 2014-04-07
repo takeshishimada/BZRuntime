@@ -64,9 +64,6 @@
             NSArray *names = [className componentsSeparatedByString:@"<"];
             clazz = NSClassFromString(names.firstObject);
         }
-        if (clazz == Nil ) {
-            NSLog(@"test");
-        }
     }
     return clazz;
 }
