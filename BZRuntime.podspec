@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'BZRuntime'
-  s.version  = '1.0.1'
+  s.version  = '1.0.2'
   s.license  = 'MIT'
   s.summary  = 'This is a library in order to get Type Encodings, Property Type and Functions'
   s.homepage = 'https://github.com/expensivegasprices/bzruntime'
