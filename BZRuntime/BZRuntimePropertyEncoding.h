@@ -27,7 +27,7 @@
 
 @interface BZRuntimePropertyEncoding : NSObject
 - (id)initWithAttributes:(NSString*)attributes;
-@property (nonatomic,assign,readonly) NSString *code;
+@property (nonatomic,strong,readonly) NSString *code;
 // Objective-C type encodings
 @property (nonatomic,assign,readonly) BOOL isChar;
 @property (nonatomic,assign,readonly) BOOL isInt;
