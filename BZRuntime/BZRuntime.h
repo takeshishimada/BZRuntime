@@ -27,6 +27,8 @@
 @interface BZRuntime : NSObject
 +(BZRuntime*)runtimeWithClass:(Class)clazz;
 +(BZRuntime*)runtimeSuperClassWithClass:(Class)clazz;
++(BZRuntime*)runtimeWithClass:(Class)clazz superClazz:(Class)superClazz;
++(BZRuntime*)runtimeSuperClassWithClass:(Class)clazz superClazz:(Class)superClazz;
 @property (nonatomic,readonly) Class clazz;
 @property (nonatomic,readonly) NSArray *propertyList;
 @end

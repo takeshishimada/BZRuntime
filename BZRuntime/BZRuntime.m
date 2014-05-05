@@ -26,31 +26,46 @@
 
 @implementation BZRuntime
 
-+(BZRuntime*)runtimeWithClass:(Class)clazz {
-    return [self runtimeWithClass:clazz enumratePropertyOfSuperClass:NO];
-}
-
-+(BZRuntime*)runtimeSuperClassWithClass:(Class)clazz {
-    return [self runtimeWithClass:clazz enumratePropertyOfSuperClass:YES];
-}
-
-+(BZRuntime*)runtimeWithClass:(Class)clazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
++(BZRuntime*)runtimeWithClass:(Class)clazz
 {
-    return [[BZRuntime alloc]initWithClass:clazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
+    return [self runtimeWithClass:clazz superClazz:[NSObject class] enumratePropertyOfSuperClass:NO];
 }
 
-- (id)initWithClass:(Class)clazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
++(BZRuntime*)runtimeSuperClassWithClass:(Class)clazz
+{
+    return [self runtimeWithClass:clazz superClazz:[NSObject class] enumratePropertyOfSuperClass:YES];
+}
+
++(BZRuntime*)runtimeWithClass:(Class)clazz superClazz:(Class)superClazz
+{
+    return [self runtimeWithClass:clazz superClazz:superClazz enumratePropertyOfSuperClass:NO];
+}
+
++(BZRuntime*)runtimeSuperClassWithClass:(Class)clazz superClazz:(Class)superClazz
+{
+    return [self runtimeWithClass:clazz superClazz:superClazz enumratePropertyOfSuperClass:YES];
+}
+
++(BZRuntime*)runtimeWithClass:(Class)clazz superClazz:(Class)superClazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
+{
+    return [[BZRuntime alloc]initWithClass:clazz superClazz:superClazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
+}
+
+- (id)initWithClass:(Class)clazz superClazz:(Class)superClazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
 {
     if ( self = [super init]) {
         _clazz = clazz;
-        _propertyList = [self propertyListWithClass:clazz propertyList:nil enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
+        _propertyList = [self propertyListWithClass:clazz propertyList:nil superClazz:superClazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
     }
     return self;
 }
 
 
-- (NSArray*)propertyListWithClass:(Class)clazz propertyList:(NSMutableArray*)propertyList enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
+- (NSArray*)propertyListWithClass:(Class)clazz propertyList:(NSMutableArray*)propertyList superClazz:(Class)superClazz enumratePropertyOfSuperClass:(BOOL)enumratePropertyOfSuperClass
 {
+    if (!clazz) {
+        return [NSArray arrayWithArray:propertyList];
+    }
     NSMutableArray *list = [NSMutableArray array];
     NSString *className = NSStringFromClass(clazz);
     id class = objc_getClass([className UTF8String]);
@@ -71,8 +86,10 @@
         [propertyList addObjectsFromArray:list];
     }
     clazz = [clazz superclass];
-    if (clazz != [NSObject class] && enumratePropertyOfSuperClass) {
-        [self propertyListWithClass:clazz propertyList:propertyList enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
+    if (clazz) {
+        if (clazz != superClazz && enumratePropertyOfSuperClass) {
+            [self propertyListWithClass:clazz propertyList:propertyList superClazz:superClazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
+        }
     }
     return [NSArray arrayWithArray:propertyList];
 }
