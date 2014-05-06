@@ -66,6 +66,12 @@
     if (!clazz) {
         return [NSArray arrayWithArray:propertyList];
     }
+    NSString *clazzName = NSStringFromClass(clazz);
+    NSString *superClazzName = NSStringFromClass(superClazz);
+    if ([clazzName isEqualToString:superClazzName]) {
+        return [NSArray arrayWithArray:propertyList];
+    }
+    
     NSMutableArray *list = [NSMutableArray array];
     NSString *className = NSStringFromClass(clazz);
     id class = objc_getClass([className UTF8String]);
@@ -85,15 +91,12 @@
         }
         [propertyList addObjectsFromArray:list];
     }
-    clazz = [clazz superclass];
-    if (clazz) {
-        NSString *clazzName = NSStringFromClass(clazz);
-        NSString *superClazzName = NSStringFromClass(superClazz);
-        if (![clazzName isEqualToString:superClazzName] && enumratePropertyOfSuperClass) {
-            [self propertyListWithClass:clazz propertyList:propertyList superClazz:superClazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
-        }
+    if (enumratePropertyOfSuperClass) {
+        clazz = [clazz superclass];
+        return [self propertyListWithClass:clazz propertyList:propertyList superClazz:superClazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
+    } else {
+        return [NSArray arrayWithArray:propertyList];
     }
-    return [NSArray arrayWithArray:propertyList];
 }
 
 
