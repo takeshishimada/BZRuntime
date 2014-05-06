@@ -87,7 +87,9 @@
     }
     clazz = [clazz superclass];
     if (clazz) {
-        if (clazz != superClazz && enumratePropertyOfSuperClass) {
+        NSString *clazzName = NSStringFromClass(clazz);
+        NSString *superClazzName = NSStringFromClass(superClazz);
+        if (![clazzName isEqualToString:superClazzName] && enumratePropertyOfSuperClass) {
             [self propertyListWithClass:clazz propertyList:propertyList superClazz:superClazz enumratePropertyOfSuperClass:enumratePropertyOfSuperClass];
         }
     }
