@@ -47,25 +47,24 @@
         _custumSetterName = @"";
         NSArray *attributeList = [attributes componentsSeparatedByString:@","];
         for ( NSString *attribute in attributeList ) {
-            if (attribute == [attributeList firstObject]) {
-            } else if (attribute == [attributeList lastObject]) {
-            } else {
-                NSString *code = [attribute substringToIndex:1];
-                if ( [@"R" isEqualToString:code] ) {
-                    _isReadonly = YES;
-                } else if ( [@"C" isEqualToString:code] ) {
-                    _isCopy = YES;
-                } else if ( [@"&" isEqualToString:code] ) {
-                    _isRetain = YES;
-                } else if ( [@"N" isEqualToString:code] ) {
-                    _isNonatomic = YES;
-                } else if ( [@"D" isEqualToString:code] ) {
-                    _isDynamic = YES;
-                } else if ( [@"W" isEqualToString:code] ) {
-                    _isWeakReference = YES;
-                } else if ( [@"P" isEqualToString:code] ) {
-                    _isEligibleForGC = YES;
-                } else if ( [@"G" isEqualToString:code] ) {
+            NSString *code = [attribute substringToIndex:1];
+            if ( [@"R" isEqualToString:code] ) {
+                _isReadonly = YES;
+            } else if ( [@"C" isEqualToString:code] ) {
+                _isCopy = YES;
+            } else if ( [@"&" isEqualToString:code] ) {
+                _isRetain = YES;
+            } else if ( [@"N" isEqualToString:code] ) {
+                _isNonatomic = YES;
+            } else if ( [@"D" isEqualToString:code] ) {
+                _isDynamic = YES;
+            } else if ( [@"W" isEqualToString:code] ) {
+                _isWeakReference = YES;
+            } else if ( [@"P" isEqualToString:code] ) {
+                _isEligibleForGC = YES;
+            }
+            if (attribute != [attributeList firstObject] && attribute == [attributeList lastObject]) {
+                if ( [@"G" isEqualToString:code] ) {
                     _isCustomGetter = YES;
                     _custumGetterName = [attribute substringFromIndex:1];
                 } else if ( [@"S" isEqualToString:code] ) {
